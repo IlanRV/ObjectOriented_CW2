@@ -43,7 +43,7 @@ public class Card implements Comparable<Card> {
   }
 
   private Rank rank;
-  private Suit suit;
+  private Suit suit; 
 
   /**
    * Creates a Card object.
