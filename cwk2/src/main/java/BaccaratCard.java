@@ -13,30 +13,54 @@ public class BaccaratCard extends Card {
     }
 
     public Rank getRank() {
-
-        return null; // gets the number or JQKA of the cards return Rank
+        
+        return rank; // gets the number or JQKA of the cards return Rank
     }
 
     public Suit getSuit() {
-        return null; // gets its symbol Hearts, Spades, etc. return Suit
+
+        return suit; // gets its symbol Hearts, Spades, etc. return Suit
     }
 
-    public String toString() {
-        return null; // turns rank and suit into a two character string (first shows rank then suit).
+    public String toString() 
+    {
+        return String.format("%c%c", rank.getSymbol(), suit.getSymbol());
     }
 
     public boolean equals(Object other) {
-        return true; // Shows the value of both the cards that were taken out ??? It should be
-                     // possible to compare BaccaratCard objects in two ways, using the equals() and
-                     // compareTo() methods.
-    }
+
+        if (this == other) return true; 
+        if (other == null || getClass() != other.getClass()) return false; 
+        
+        BaccaratCard that = (BaccaratCard) other; 
+        return rank == that.rank && suit == that.suit; 
+    } 
+   
 
     public int compareTo(Card other) {
-        return 0; // ???
+        // compare suits
+        int suitDifference = this.getSuit().compareTo(other.getSuit());
+        if (suitDifference != 0) {
+            return suitDifference;
+        }
+
+        // If suits are the same, compare ranks
+        return this.getRank().compareTo(other.getRank());
     }
 
     public int value() {
-        return 0; // return the value of both the card (ex: K+3 = 3, 2+5 = 7, K+Q = 0, etc)
+        Card.Rank rank = getRank();
+
+        if (rank == Card.Rank.JACK || rank == Card.Rank.QUEEN || rank == Card.Rank.KING || rank == Card.Rank.TEN)
+        {
+            return 0; 
+        }
+        if (rank == Card.Rank.ACE)
+        {
+            return 1;
+        }
+
+        return rank.ordinal() + 1;
     }
 
     // TO answer some of these questions the Card class was created check to help
