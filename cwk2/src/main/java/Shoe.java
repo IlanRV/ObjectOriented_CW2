@@ -2,12 +2,11 @@
 import java.util.Collections;
 
 public class Shoe {
-    private BaccaratCard[] cards; //stores card in shoe.
+    private BaccaratCard[] cards; //stores cards in shoe.
     private int size;  // Keeps track of number of cards.
 
-    public Shoe(int decks)
-    {
-        if (decks !=6 && decks !=8) {
+    public Shoe(int decks) {
+        if (decks != 6 && decks != 8) {
             throw new CardException("Number of decks must be 6 or 8.");
         } 
 
@@ -15,15 +14,28 @@ public class Shoe {
         
         cards = new BaccaratCard[totalCards]; //starts storing cards.
 
-        //starts creating complete decks.
-
-        for (int i = 0; i < decks; i++){
-            for (Card.Rank rank : Card.Rank.values()) {
-                for (Card.Suit suit : Card.Suit.values()) {
-                    cards[size++] = new BaccaratCard(rank, suit);
+        // Ensuring the right order of card ranks and suits for your specific test setup
+        int index = 0;
+        for (int i = 0; i < decks; i++) {
+            for (Card.Suit suit : Card.Suit.values()) { // Loop suits outside
+                for (Card.Rank rank : Card.Rank.values()) { // Loop ranks inside
+                    cards[index++] = new BaccaratCard(rank, suit);
                 }
             }
         }
+        size = index; // Set size to the last index incremented
+    }
+
+    public Card deal() {
+        if (size == 0) {
+            throw new CardException("Error dealing from an empty shoe.");
+        }
+
+        Card dealtCard = cards[0]; // Deal the first card
+        System.arraycopy(cards, 1, cards, 0, size - 1); // Shift all other cards one position forward
+        cards[size - 1] = null; // Nullify the last position
+        size--; // Decrease the size of the shoe
+        return dealtCard;
     }
 
     public int size()
@@ -44,19 +56,5 @@ public class Shoe {
     
         return 0; // Placeholder return value
     }
-
-    public Card deal()
-    {
-        if (size == 0) {
-            throw new CardException("Error dealing from an empty shoe.");
-        }
-        
-        Card dealtCard = cards[--size];
-        cards[size] = null; 
-        
-        return dealtCard; // removes the first stored card and returns it to the caller. if deals from empty shoe = CardExeption.  
-    }
-    
     // TO answer some of these questions the CardCollection class was created check to help out your code. 
-
 }
