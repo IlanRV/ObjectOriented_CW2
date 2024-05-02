@@ -61,6 +61,7 @@ public class BaccaratCard extends Card {
         }
 
         return rank.ordinal() + 1;
+
     }
 
     // TO answer some of these questions the Card class was created check to help

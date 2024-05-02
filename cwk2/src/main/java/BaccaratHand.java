@@ -7,10 +7,10 @@
 public class BaccaratHand {
 
         private Card[] cards;
-        private int count; // To keep track of the number of cards currently in the hand
+        private int count; //
     
         public BaccaratHand() {
-            cards = new Card[10]; // Let's assume a hand can hold up to 10 cards
+            cards = new Card[10]; 
             count = 0;
         }
     
@@ -21,25 +21,23 @@ public class BaccaratHand {
             count++;
             return count; // Returns the new size of the hand after adding the card
         } else {
-            // Handle the situation where there's no room to add a new card
-            // Returning -1 could indicate the hand is full
             return -1;
         }
     }
 
     public int size()
     {
-        return count; // should return the number of cards in the hand. 
+        return count;  
     }
 
     public int value() {
             int totalValue = 0;
             for (int i = 0; i < count; i++) {
                 Card card = cards[i];
-                int cardValue = card.value(); // Assuming 'value()' calculates the Baccarat value for a card
+                int cardValue = card.value(); 
                 totalValue += cardValue;
             }
-            return totalValue % 10; // Baccarat values are often calculated as the rightmost digit of the sum
+            return totalValue % 10;
         }
 
     public boolean isNatural()
@@ -62,8 +60,7 @@ public class BaccaratHand {
                 result += " ";
             }
         }
-        return result; // Should return a string with two character representations of each card separated by a space from the other (7♠ 4♣).
+        return result; 
     }
-
-    // TO answer some of these questions the CardCollection class was created check to help out your code. 
 }
+
